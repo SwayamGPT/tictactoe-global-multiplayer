@@ -1,0 +1,39 @@
+name: Build Windows EXE
+
+on:
+  push:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+  build-windows:
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v4
+
+    - name: Download Windows SFML
+      run: Invoke-WebRequest -Uri "https://github.com/SFML/SFML/releases/download/2.6.2/SFML-2.6.2-windows-vc17-64-bit.zip" -OutFile "sfml.zip"
+      
+    - name: Extract SFML
+      run: Expand-Archive sfml.zip -DestinationPath C:\SFML
+
+    - name: Configure CMake
+      run: cmake -B build -S . -DCMAKE_BUILD_TYPE=Release -DSFML_DIR="C:\SFML\SFML-2.6.2\lib\cmake\SFML"
+
+    - name: Compile Game
+      run: cmake --build build --config Release
+
+    - name: Bundle EXE, DLLs, and Font
+      run: |
+        mkdir ReleasePackage
+        copy build\Release\TicTacToe.exe ReleasePackage\
+        copy C:\SFML\SFML-2.6.2\bin\*.dll ReleasePackage\
+        copy arial.ttf ReleasePackage\
+
+    - name: Upload Windows Game Package
+      uses: actions/upload-artifact@v4
+      with:
+        name: TicTacToe-Windows-Playable
+        path: ReleasePackage/
