@@ -28,10 +28,10 @@ jobs:
 
     - name: Bundle EXE, DLLs, and Font
       run: |
-        mkdir ReleasePackage
-        copy build\Release\TicTacToe.exe ReleasePackage\
-        copy C:\SFML\SFML-2.6.2\bin\*.dll ReleasePackage\
-        copy arial.ttf ReleasePackage\
+        New-Item -ItemType Directory -Force -Path ReleasePackage
+        Get-ChildItem -Path build -Filter TicTacToe.exe -Recurse | Copy-Item -Destination ReleasePackage
+        Copy-Item C:\SFML\SFML-2.6.2\bin\*.dll -Destination ReleasePackage
+        Copy-Item arial.ttf -Destination ReleasePackage
 
     - name: Upload Windows Game Package
       uses: actions/upload-artifact@v4
