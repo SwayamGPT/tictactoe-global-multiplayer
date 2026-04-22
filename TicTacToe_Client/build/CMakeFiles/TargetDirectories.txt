@@ -1,3 +1,0 @@
-/Users/swayamgupta/Documents/TicTacToe_Client/build/CMakeFiles/TicTacToe.dir
-/Users/swayamgupta/Documents/TicTacToe_Client/build/CMakeFiles/edit_cache.dir
-/Users/swayamgupta/Documents/TicTacToe_Client/build/CMakeFiles/rebuild_cache.dir
