@@ -1,1 +1,0 @@
-/usr/bin/c++  -arch arm64 -Wl,-search_paths_first -Wl,-headerpad_max_install_names CMakeFiles/Server.dir/server.cpp.o -o Server  -Wl,-rpath,/opt/homebrew/lib /opt/homebrew/lib/libsfml-network.2.6.2.dylib /opt/homebrew/lib/libsfml-system.2.6.2.dylib
